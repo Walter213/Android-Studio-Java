@@ -10,8 +10,6 @@
     <color name="receive_chatter_title_color">#009999</color>
     <color name="receive_chatter_text_view_background_color">#cceeeeee</color>
     <color name="receive_chatter_text_view_text_color">#990000</color>
-
-
-
-
+    <color name="color_divider1">#095385</color>
+    <color name="color_divider2">#ffff00</color>
 </resources>

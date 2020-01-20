@@ -66,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                     this.startActivity(intent);
                     break;
                 }
+            case (R.id.menu_item_view_custom_list):
+            {
+                Intent intent = new Intent(this, CustomListActivity.class);
+                this.startActivity(intent);
+                break;
+            }
         }
 
         return true;

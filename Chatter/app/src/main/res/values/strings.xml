@@ -4,4 +4,5 @@
     <string name="send_chatter_hint">Enter data here</string>
     <string name="send_chatter_button_text">Send Chat</string>
     <string name="receive_chatter_title">Start Something</string>
+    <string name="list_view_empty_text">No Chatter Available!</string>
 </resources>
