@@ -1,11 +1,9 @@
-package ca.nait.gschenk.chatter;
+package ca.nait.gschenk.chatter01;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ListActivity;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
-import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -16,20 +14,21 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.util.ArrayList;
 
-public class SystemListActivity extends ListActivity
+public class ReceiveActivity extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_receive);
         getFromServer();
     }
 
-    private void getFromServer() {
+    private void getFromServer()
+    {
         BufferedReader in = null;
-        ArrayList chatter = new ArrayList();
+        TextView textBox = findViewById(R.id.text_view_chatter);
 
         try
         {
@@ -40,17 +39,30 @@ public class SystemListActivity extends ListActivity
             in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
             String line = "";
-            while ((line = in.readLine()) != null)
+
+            while((line = in.readLine()) != null)
             {
-                chatter.add(line);
+                textBox.append(line + "\n");
             }
+
             in.close();
-            ArrayAdapter<ArrayList> theAdapter = new ArrayAdapter<ArrayList>(this , android.R.layout.simple_list_item_1 , chatter);
-            setListAdapter(theAdapter);
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
         }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

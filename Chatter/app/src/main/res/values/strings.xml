@@ -1,8 +1,14 @@
 <resources>
-    <string name="app_name">Chatter</string>
-    <string name="send_chatter_title">Start Something</string>
-    <string name="send_chatter_hint">Enter data here</string>
-    <string name="send_chatter_button_text">Send Chat</string>
-    <string name="receive_chatter_title">Start Something</string>
-    <string name="list_view_empty_text">No Chatter Available!</string>
+    <string name="app_name">Chatter01</string>
+    <string name="send_title_text">Post Chatter</string>
+    <string name="edit_text_hint">Type message here</string>
+    <string name="button_send_text">Post Chatter</string>
+    <string name="button_view_text">View Chatter</string>
+    <string name="view_title_text">Last 30 Chats</string>
+    <string name="preference_user_name_title">User Name</string>
+    <string name="preference_user_name_summary">Use tis to set or change your alias</string>
+    <string name="preference_user_password_title">Password</string>
+    <string name="preference_user_password_summary">Use this to set or change your password</string>
+    <string name="preference_user_main_bg_color_title">Main Background Color</string>
+    <string name="preference_user_main_bg_color_summary">Set the main background color (#RRGGBB)</string>
 </resources>

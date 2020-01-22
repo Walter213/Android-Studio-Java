@@ -3,13 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="send_chatter_title_color">#990000</color>
-    <color name="send_chatter_background_color">#ddbbbb</color>
-    <color name="send_chatter_edit_text_background_color">#cceeeeee</color>
-    <color name="receive_chatter_background_color">#99cccc</color>
-    <color name="receive_chatter_title_color">#009999</color>
-    <color name="receive_chatter_text_view_background_color">#cceeeeee</color>
-    <color name="receive_chatter_text_view_text_color">#990000</color>
-    <color name="color_divider1">#095385</color>
-    <color name="color_divider2">#ffff00</color>
+    <color name="color_send_title">#990000</color>
+    <color name="color_send_bg">#DBA4A4</color>
+    <color name="color_edit_text_bg">#cecece</color>
+    <color name="color_view_title">#009999</color>
+    <color name="color_view_bg">#A1E2E2</color>
+    <color name="color_text_view_bg">#cecece</color>
+    <color name="color_text_view_text">#009999</color>
+
 </resources>

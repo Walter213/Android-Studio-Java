@@ -1,4 +1,4 @@
-package ca.nait.gschenk.chatter;
+package ca.nait.gschenk.chatter01;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("ca.nait.gschenk.chatter", appContext.getPackageName());
+        assertEquals("ca.nait.gschenk.chatter01", appContext.getPackageName());
     }
 }
