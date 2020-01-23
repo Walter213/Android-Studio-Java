@@ -1,3 +1,20 @@
 <resources>
+    // App Name
     <string name="app_name">Lab 1 Oscar Reviews</string>
+
+    // Button
+    <string name="button_post_review">Post Review</string>
+
+    // Preferences Titles and Summaries
+    <string name="preferences_url_title">URL</string>
+    <string name="preferences_url_summary">URL is found here</string>
+
+    <string name="preferences_login_name_title">Login Name</string>
+    <string name="preferences_login_name_summary">Login Name is displayed here</string>
+
+    <string name="preferences_password_title">Password</string>
+    <string name="preferences_password_summary">Password is displayed here</string>
+
+    <string name="preferences_background_title">Background Color</string>
+    <string name="preferences_background_summary">You can choose a different background color for the main page</string>
 </resources>
