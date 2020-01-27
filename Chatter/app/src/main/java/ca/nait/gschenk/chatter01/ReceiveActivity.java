@@ -17,6 +17,10 @@ import java.net.URI;
 
 public class ReceiveActivity extends AppCompatActivity
 {
+    public static final String SENDER = "sender";
+    public static final String TEXT = "text";
+    public static final String DATE = "myDate";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -27,6 +31,7 @@ public class ReceiveActivity extends AppCompatActivity
 
     private void getFromServer()
     {
+        String [] keys = new String[] {SENDER, TEXT, DATE};
         BufferedReader in = null;
         TextView textBox = findViewById(R.id.text_view_chatter);
 
@@ -50,6 +55,7 @@ public class ReceiveActivity extends AppCompatActivity
         catch(Exception e)
         {
             Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
+            String [] names = new String[] {SENDER, TEXT, DATE};
         }
 
     }

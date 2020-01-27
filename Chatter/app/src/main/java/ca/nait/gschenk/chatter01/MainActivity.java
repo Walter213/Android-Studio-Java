@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //prefs = this.getSharedPreferences(this,);
 
         if(Build.VERSION.SDK_INT > 9)
         {
@@ -107,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         {
             case R.id.button_send:
             {
+                String x = ReceiveActivity.SENDER;
+
                 EditText textBox = findViewById(R.id.edit_text_message);
                 String chatter = textBox.getText().toString();
                 postToServer(chatter);
