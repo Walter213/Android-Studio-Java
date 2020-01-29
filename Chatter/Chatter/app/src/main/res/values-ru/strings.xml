@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chat</string>
+    <string name="send_title_text">Отправить Chatter</string>
+    <string name="edit_text_hint">Введите сообщение здесь</string>
+    <string name="button_send_text">Отправить Chatter</string>
+    <string name="button_view_text">Посмотреть</string>
+    <string name="view_title_text">Последние 30 чатов</string>
+
+    <string name="preference_user_name_title">User Name</string>
+    <string name="preference_user_name_summary">User this to set or change your alias</string>
+    <string name="preference_user_password_title">Password</string>
+    <string name="preference_user_password_summary">Use this to set or change the password</string>
+    <string name="preference_main_bg_color_title">Main Background Color</string>
+    <string name="preference_main_bg_color_summary">Set the main background color</string>
+</resources>
