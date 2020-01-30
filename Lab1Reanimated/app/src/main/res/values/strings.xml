@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // App Name
+    <string name="app_name">Lab 1 Oscar Reviews</string>
+
+    // Button
+    <string name="button_post_review">Post Review</string>
+
+    // View Activity
+    <string name="empty_text_oscar_review">No Oscar Reviews Available</string>
+
+    // Preferences Titles and Summaries
+    <string name="preferences_url_title">URL</string>
+    <string name="preferences_url_summary">Enter URL</string>
+    <string name="preferences_login_name_title">Login</string>
+    <string name="preferences_login_name_summary">Enter Login Credentials</string>
+    <string name="preferences_password_title">Password</string>
+    <string name="preferences_password_summary">Enter Password</string>
+    <string name="preferences_background_title">Main Background Color</string>
+    <string name="preferences_background_summary">Change Background Here</string>
+</resources>
