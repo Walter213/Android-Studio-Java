@@ -62,9 +62,7 @@ public class ReceiveActivity extends AppCompatActivity
         {
             Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
            String [] names = new String[]{SENDER, TEXT, DATE};
-
         }
-
     }
 }
 

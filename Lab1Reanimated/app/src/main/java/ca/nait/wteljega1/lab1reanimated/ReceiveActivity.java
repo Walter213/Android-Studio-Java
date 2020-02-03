@@ -1,6 +1,4 @@
-package ca.nait.gschenk.chatter01;
-
-import androidx.appcompat.app.AppCompatActivity;
+package ca.nait.wteljega1.lab1reanimated;
 
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -16,61 +14,51 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.List;
 
-public class SystemListActivity extends ListActivity
+public class ReceiveActivity extends ListActivity
 {
+    //private static final String REVIEW = "review";
+    //private static final String REVIEWER = "reviewer";
+    //private static final String NOMINEE = "nominee";
+    //private static final String CATEGORY = "";
+    //private static final String PASSWORD = "password";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_recieve_review);
         getFromServer();
     }
 
     private void getFromServer()
     {
-        ArrayList chatter = new ArrayList();
+        BufferedReader in = null;
+        ArrayList oscarreview = new ArrayList();
 
         try
         {
             HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
-            request.setURI(new URI("http://www.youcode.ca/JSONServlet"));
+            request.setURI(new URI("http://www.youcode.ca/showReviews.jsp"));
             HttpResponse response = client.execute(request);
-            BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+            in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
             String line = "";
+            String NL = System.getProperty("line.separator");
 
             while((line = in.readLine()) != null)
             {
-                chatter.add(line);
+                oscarreview.add(line);
             }
             in.close();
 
-            ArrayAdapter<ArrayList> theAdapter =
-                    new ArrayAdapter<ArrayList>(this, android.R.layout.simple_list_item_1, chatter);
-            this.setListAdapter(theAdapter);
+            ArrayAdapter<ArrayList> adapter = new ArrayAdapter<ArrayList>(this, android.R.layout.simple_list_item_1, oscarreview);
+            setListAdapter(adapter);
         }
         catch(Exception e)
         {
             Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
         }
-
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

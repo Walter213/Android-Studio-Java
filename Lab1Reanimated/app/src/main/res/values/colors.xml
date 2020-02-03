@@ -6,4 +6,8 @@
     <color name="titleColor">#0000FF</color>
     <color name="backgroundColor">#702963</color>
     <color name="whiteTextBackground">#ffffff</color>
+    <color name="color_text_view_bg">#cecece</color>
+    <color name="color_text_view_text">#009999</color>
+    <color name="color_view_title">#009999</color>
+    <color name="color_view_bg">#A1E2E2</color>
 </resources>

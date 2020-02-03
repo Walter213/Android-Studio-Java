@@ -7,6 +7,7 @@
     <string name="button_post_review">Post Review</string>
 
     // View Activity
+    <string name="view_title_text">Last 30 Oscar Reviews</string>
     <string name="empty_text_oscar_review">No Oscar Reviews Available</string>
 
     // Preferences Titles and Summaries

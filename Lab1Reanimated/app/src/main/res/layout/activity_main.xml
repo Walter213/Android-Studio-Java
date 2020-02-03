@@ -60,47 +60,37 @@
         android:textColor="@color/titleColor"
         android:textSize="20sp"/>
 
+    // put text into string xml folder later
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <RadioButton
+            android:id="@+id/film"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Best Picture"/>
         <RadioButton
+            android:id="@+id/actor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Best Actor"/>
         <RadioButton
+            android:id="@+id/actress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Best Actress"/>
         <RadioButton
+            android:id="@+id/editing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Film Editing"/>
         <RadioButton
+            android:id="@+id/effects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Visual Effects"/>
     </RadioGroup>
-
-    <!-- <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RadioButton android:id="@+id/radio_pirates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pirates"
-            android:onClick="onRadioButtonClicked"/>
-        <RadioButton android:id="@+id/radio_ninjas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ninjas"
-            android:onClick="onRadioButtonClicked"/>
-    </RadioGroup> -->
 
     // Review
     <TextView

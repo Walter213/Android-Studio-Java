@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <TextView
-    android:id="@+id/custom_row_sender"
+    android:id="@+id/custom_row_reviewer"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
     android:layout_alignParentLeft="true"
@@ -26,11 +26,32 @@
     android:typeface="sans" />
 
     <TextView
-    android:id="@+id/custom_row_message"
+    android:id="@+id/custom_row_category"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:layout_below="@id/custom_row_sender"
+    android:layout_below="@id/custom_row_reviewer"
     android:textColor="#ffffff"
     android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/custom_row_nominee"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:typeface="sans" />
+    <TextView
+        android:id="@+id/custom_row_review"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:typeface="sans" />
 
     </RelativeLayout>

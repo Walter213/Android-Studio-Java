@@ -14,11 +14,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -68,6 +75,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 this.startActivity(intent);
                 break;
             }
+            case R.id.menu_view_reviews:
+            {
+                Intent intent = new Intent(this,ReceiveActivity.class);
+                this.startActivity(intent);
+                break;
+            }
         }
         return true;
     }
@@ -80,6 +93,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     // onClick method
+    public void onClick(View view)
+    {
+        switch(view.getId())
+        {
+            case R.id.button_send:
+            {
+                //string z =
+            }
+        }
+    }
 
     // Posting to Server method
     private void postToServer(String message)
@@ -90,7 +113,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         {
             HttpClient client = new DefaultHttpClient();
             HttpPost form = new HttpPost("http://www.youcode.ca/Lab01Servlet");
-            // continue on
+            List<NameValuePair> formParameters = new ArrayList<NameValuePair>();
+            formParameters.add(new BasicNameValuePair("DATA", message));
+            formParameters.add(new BasicNameValuePair("LOGIN_NAME", username ));
+            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(formParameters);
+            form.setEntity(formEntity);
+            client.execute(form);
         }
         catch(Exception e)
         {
