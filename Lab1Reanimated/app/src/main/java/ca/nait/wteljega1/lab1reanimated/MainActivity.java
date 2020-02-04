@@ -14,6 +14,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -27,7 +30,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener
 {
     SharedPreferences prefs;
     View mainView;
@@ -50,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         mainView = findViewById(R.id.linear_layout_main);
         String backgroundColor = prefs.getString("preference_main_bg_color", "#702963");
         mainView.setBackgroundColor(Color.parseColor(backgroundColor));
+
+        Button postOscarButton = this.findViewById(R.id.button_send);
+
+        postOscarButton.setOnClickListener(this);
 
         prefs.registerOnSharedPreferenceChangeListener(this);
     }
@@ -77,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
             case R.id.menu_view_reviews:
             {
-                Intent intent = new Intent(this,ReceiveActivity.class);
+                Intent intent = new Intent(this, OscarCustomListActivity.class);
                 this.startActivity(intent);
                 break;
             }
@@ -92,30 +99,53 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         mainView.setBackgroundColor(Color.parseColor(backgroundColor));
     }
 
-    // onClick method
+    @Override
     public void onClick(View view)
     {
         switch(view.getId())
         {
             case R.id.button_send:
             {
-                //string z =
+                EditText NomineeText = (EditText)findViewById(R.id.create_nominee_message);
+                String NomineeTransfer = NomineeText.getText().toString();
+
+                EditText ReviewText = (EditText)findViewById(R.id.create_review_message);
+                String ReviewTransfer = ReviewText.getText().toString();
+
+                // Crashes here
+                RadioGroup getChosenGroup = (RadioGroup)findViewById(R.id.radioGroup);
+                RadioButton chosenRadioButton = (RadioButton)findViewById(getChosenGroup.getCheckedRadioButtonId());
+                String radioButtonOutcome = chosenRadioButton.getTag().toString();
+
+                NomineeText.setText("");
+                ReviewText.setText("");
+
+                postToServer(NomineeTransfer, ReviewTransfer, radioButtonOutcome);
+
+                break;
             }
         }
     }
 
     // Posting to Server method
-    private void postToServer(String message)
+    private void postToServer(String nominee, String review, String radioButton)
     {
         String username = prefs.getString("preference_user_name", "JustARandom");
+        String password = prefs.getString("preference_password", "Random");
 
         try
         {
             HttpClient client = new DefaultHttpClient();
             HttpPost form = new HttpPost("http://www.youcode.ca/Lab01Servlet");
             List<NameValuePair> formParameters = new ArrayList<NameValuePair>();
-            formParameters.add(new BasicNameValuePair("DATA", message));
-            formParameters.add(new BasicNameValuePair("LOGIN_NAME", username ));
+
+            // only section that is needed atm including the String[] keys value
+            formParameters.add(new BasicNameValuePair("USERNAME", username));
+            formParameters.add(new BasicNameValuePair("PASSWORD", password));
+            formParameters.add(new BasicNameValuePair("NOMINEE", nominee));
+            formParameters.add(new BasicNameValuePair("REVIEW", review));
+            formParameters.add(new BasicNameValuePair("CATEGORY", radioButton));
+
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(formParameters);
             form.setEntity(formEntity);
             client.execute(form);

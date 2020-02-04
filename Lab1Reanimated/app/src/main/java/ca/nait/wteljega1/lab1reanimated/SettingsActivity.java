@@ -1,7 +1,5 @@
 package ca.nait.wteljega1.lab1reanimated;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
-        android:key="preference_user_name"
+        android:key="preference_url"
         android:title="@string/preferences_url_title"
         android:summary="@string/preferences_url_summary"/>
     <EditTextPreference
@@ -9,7 +9,7 @@
         android:title="@string/preferences_login_name_title"
         android:summary="@string/preferences_login_name_summary"/>
     <EditTextPreference
-        android:key="preference_user_name"
+        android:key="preference_password"
         android:title="@string/preferences_password_title"
         android:summary="@string/preferences_password_summary"/>
     <ListPreference
