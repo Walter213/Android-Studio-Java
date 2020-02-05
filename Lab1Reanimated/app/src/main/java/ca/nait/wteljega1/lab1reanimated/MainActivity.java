@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private void postToServer(String nominee, String review, String radioButton)
     {
         String username = prefs.getString("preference_user_name", "JustARandom");
-        String password = prefs.getString("preference_password", "Random");
+        String password = prefs.getString("preference_password", "oscar275");
 
         try
         {
@@ -139,8 +139,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             HttpPost form = new HttpPost("http://www.youcode.ca/Lab01Servlet");
             List<NameValuePair> formParameters = new ArrayList<NameValuePair>();
 
-            // only section that is needed atm including the String[] keys value
-            formParameters.add(new BasicNameValuePair("USERNAME", username));
+            formParameters.add(new BasicNameValuePair("REVIEWER", username));
             formParameters.add(new BasicNameValuePair("PASSWORD", password));
             formParameters.add(new BasicNameValuePair("NOMINEE", nominee));
             formParameters.add(new BasicNameValuePair("REVIEW", review));

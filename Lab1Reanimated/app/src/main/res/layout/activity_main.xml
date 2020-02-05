@@ -70,26 +70,32 @@
             android:id="@+id/film"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
+            android:tag="film"
             android:text="Best Picture"/>
         <RadioButton
             android:id="@+id/actor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tag="actor"
             android:text="Best Actor"/>
         <RadioButton
             android:id="@+id/actress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tag="actress"
             android:text="Best Actress"/>
         <RadioButton
             android:id="@+id/editing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tag="editing"
             android:text="Film Editing"/>
         <RadioButton
             android:id="@+id/effects"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tag="effects"
             android:text="Visual Effects"/>
     </RadioGroup>
 
