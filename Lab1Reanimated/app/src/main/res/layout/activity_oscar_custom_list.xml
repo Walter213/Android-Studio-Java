@@ -4,7 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OscarCustomListActivity">
+    tools:context=".OscarCustomListActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/selectacategory"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/selectcategory"
+            android:layout_marginBottom="10dp"/>
+
+        <Spinner
+            android:id="@+id/category_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dropDownWidth="200dp"
+            android:padding="16dp"
+            android:prompt="@string/DDLPrompt"
+            android:entries="@array/category_arrays"></Spinner>
+    </LinearLayout>
 
     <ListView
         android:id="@android:id/list"

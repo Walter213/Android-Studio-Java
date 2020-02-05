@@ -19,4 +19,16 @@
     <string name="preferences_password_summary">Enter Password</string>
     <string name="preferences_background_title">Main Background Color</string>
     <string name="preferences_background_summary">Change Background Here</string>
+
+    // View Reviews DDL
+    <string name="selectcategory">View Different Categories</string>
+    <string name="DDLPrompt">Select Category</string>
+
+    <string-array name="category_arrays">
+        <item name="film">Best Picture</item>
+        <item name="actor">Best Actor</item>
+        <item name="actress">Best Actress</item>
+        <item name="editing">Film Editing</item>
+        <item name="effects">Visual Effects</item>
+    </string-array>
 </resources>
