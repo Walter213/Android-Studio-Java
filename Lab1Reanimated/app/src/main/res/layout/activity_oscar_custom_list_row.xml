@@ -25,6 +25,13 @@
     android:typeface="sans" />
 
     <TextView
+        android:id="@+id/custom_row_category"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+    <TextView
     android:id="@+id/custom_row_nominee"
     android:layout_width="wrap_content"
     android:layout_height="fill_parent"
@@ -32,11 +39,11 @@
     android:textColor="#ffffff"
     android:textSize="14sp" />
 
-    <!--<TextView
-        android:id="@+id/custom_row_category"
+    <TextView
+        android:id="@+id/custom_row_review"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_below="@id/custom_row_sender"
+        android:layout_below="@id/custom_row_reviewer"
         android:textColor="#ffffff"
-        android:textSize="14sp" />-->
+        android:textSize="14sp" />
 </LinearLayout>

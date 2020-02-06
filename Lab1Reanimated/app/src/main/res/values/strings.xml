@@ -25,10 +25,10 @@
     <string name="DDLPrompt">Select Category</string>
 
     <string-array name="category_arrays">
-        <item name="film">Best Picture</item>
-        <item name="actor">Best Actor</item>
-        <item name="actress">Best Actress</item>
-        <item name="editing">Film Editing</item>
-        <item name="effects">Visual Effects</item>
+        <item>Best Picture</item>
+        <item>Best Actor</item>
+        <item>Best Actress</item>
+        <item>Film Editing</item>
+        <item>Visual Effects</item>
     </string-array>
 </resources>
