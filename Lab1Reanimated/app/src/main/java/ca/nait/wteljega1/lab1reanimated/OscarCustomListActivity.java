@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class OscarCustomListActivity extends ListActivity implements AdapterView.OnItemSelectedListener
 {
     ArrayList<HashMap<String,String>> oscar = new ArrayList<HashMap<String,String>>();
-    public static String parameter;
+    public static String parameter = "film";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +47,8 @@ public class OscarCustomListActivity extends ListActivity implements AdapterView
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        parameter = parent.getItemAtPosition(position).toString().split("")[1].toLowerCase();
+        parameter = parent.getItemAtPosition(position).toString().split(" ")[1].toLowerCase();
+
         displayOscarReviews();
     }
 
@@ -70,17 +71,20 @@ public class OscarCustomListActivity extends ListActivity implements AdapterView
 
     private void populateList()
     {
-        //BufferedReader in = null;
+        BufferedReader in = null;
         try
         {
-            Toast.makeText(this, "From populate " + parameter, Toast.LENGTH_LONG).show();
-           /* HttpClient client = new DefaultHttpClient();
+            Toast.makeText(this, "Category: " + parameter, Toast.LENGTH_LONG).show();
+            HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
-            request.setURI(new URI("http://www.youcode.ca/Lab01Servlet" + "?CATEGORY=" + category));
+            request.setURI(new URI("http://www.youcode.ca/Lab01Servlet" + "?CATEGORY=" + parameter));
             HttpResponse response = client.execute(request);
             in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
             String line = "";
+
+            // Clear out list to bring in new filter
+            oscar.clear();
 
             while((line = in.readLine()) != null)
             {
@@ -101,7 +105,7 @@ public class OscarCustomListActivity extends ListActivity implements AdapterView
 
                 oscar.add(temp);
             }
-            in.close();*/
+            in.close();
         }
         catch (Exception e)
         {
