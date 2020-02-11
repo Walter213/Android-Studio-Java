@@ -49,6 +49,11 @@ public class OscarCustomListActivity extends ListActivity implements AdapterView
     {
         parameter = parent.getItemAtPosition(position).toString().split(" ")[1].toLowerCase();
 
+        if(parameter.contains("picture"))
+        {
+            parameter = "film";
+        }
+
         displayOscarReviews();
     }
 
