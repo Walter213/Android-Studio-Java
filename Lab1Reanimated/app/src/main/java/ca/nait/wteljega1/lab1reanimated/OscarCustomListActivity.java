@@ -26,7 +26,7 @@ import java.util.HashMap;
 public class OscarCustomListActivity extends ListActivity implements AdapterView.OnItemSelectedListener
 {
     ArrayList<HashMap<String,String>> oscar = new ArrayList<HashMap<String,String>>();
-    public static String parameter = "film";
+    public static String parameter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -79,7 +79,7 @@ public class OscarCustomListActivity extends ListActivity implements AdapterView
         BufferedReader in = null;
         try
         {
-            Toast.makeText(this, "Category: " + parameter, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Category: " + parameter, Toast.LENGTH_LONG).show();
             HttpClient client = new DefaultHttpClient();
             HttpGet request = new HttpGet();
             request.setURI(new URI("http://www.youcode.ca/Lab01Servlet" + "?CATEGORY=" + parameter));

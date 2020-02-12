@@ -3,8 +3,10 @@ package com.example.week06;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
 {
     private static final String TAG = "MainActivity";
     SharedPreferences prefs;
+    ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -39,15 +43,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         setContentView(R.layout.activity_main);
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        //////////////////////////////////////////////////////////////////////
-        // remove the following after the post is converted to AsyncTask
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy =
-                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-        ///////////////////////////////////////////////////////////////////////
         Button postButton = findViewById(R.id.button_post_chat);
         postButton.setOnClickListener(this);
 
@@ -63,7 +58,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
             {
                 EditText text = (EditText) findViewById(R.id.edit_text_post_chat);
                 String chat = text.getText().toString();
-                postToServer(chat);
+
+                pd = ProgressDialog.show(this, "", "Posting Message...");
+                new ChatWriter().execute(chat);
+
                 text.setText("");
                 Log.d(TAG,"posting a message menu item ");
                 break;
@@ -71,27 +69,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
             }
         }
     }
-
-    private void postToServer(String chat)
-    {
-        String userName = prefs.getString(getResources().getString(R.string.preference_key_login_name), "unknown");
-        try
-        {
-            HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost("http://www.youcode.ca/JitterServlet");
-            List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-            postParameters.add(new BasicNameValuePair("DATA", chat));
-            postParameters.add(new BasicNameValuePair("LOGIN_NAME", userName));
-            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
-            post.setEntity(formEntity);
-            client.execute(post);
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
-        }
-        Log.d(TAG,"should be a successful");
-   }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -124,7 +101,49 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 startActivity(intent);
                 break;
             }
+            case R.id.menu_item_display_chatter:
+            {
+                Intent intent = new Intent(this, DisplayActivity.class);
+                startActivity(intent);
+                Log.d(TAG, "starting Display Activity");
+                break;
+            }
         }
         return true;
+    }
+
+    private class ChatWriter extends AsyncTask <String, Void, String>
+    {
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            String message = strings[0];
+            String userName = prefs.getString(getResources().getString(R.string.preference_key_login_name), "unknown");
+            try
+            {
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost("http://www.youcode.ca/JitterServlet");
+                List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+                postParameters.add(new BasicNameValuePair("DATA", message));
+                postParameters.add(new BasicNameValuePair("LOGIN_NAME", userName));
+                UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
+                post.setEntity(formEntity);
+                client.execute(post);
+
+                Log.d(TAG,"should be a successful");
+            }
+            catch(Exception e)
+            {
+                Log.d(TAG, "error on ChatWriter() " + e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s)
+        {
+            pd.dismiss();
+        }
     }
 }

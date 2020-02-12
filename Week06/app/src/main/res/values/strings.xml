@@ -9,5 +9,6 @@
     <string name="preference_key_login_name">user_login_name</string>
     <string name="preference_title_login_name">Alias</string>
     <string name="preference_summary_login_name">Use this to set or modify your Chatter Alias</string>
-
+    <string name="text_display_title">Display Chatter</string>
+    <string name="menu_item_display_chatter">Display Chatter</string>
 </resources>
