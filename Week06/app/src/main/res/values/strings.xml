@@ -5,6 +5,7 @@
     <string name="text_button_send">Post Chat</string>
     <string name="text_send_chat_hint">Type chat here</string>
     <string name="menu_item_view_preferences">Preferences</string>
+    <string name="menu_item_view_cursor">View Cursor</string>
     <string name="menu_item_start_service">Start Service</string>
     <string name="menu_item_stop_service">Stop Service</string>
     <string name="menu_item_display_chatter">Display Chatter</string>

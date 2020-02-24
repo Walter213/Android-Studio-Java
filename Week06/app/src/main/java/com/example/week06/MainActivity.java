@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 Log.d(TAG, "display chatter");
                 break;
             }
+            case R.id.menu_item_view_cursor:
+            {
+                startActivity(new Intent(this, CursorActivity.class) );
+                break;
+            }
             case R.id.menu_item_view_preferences:
             {
                 Intent intent = new Intent(this, PrefsActivity.class);
