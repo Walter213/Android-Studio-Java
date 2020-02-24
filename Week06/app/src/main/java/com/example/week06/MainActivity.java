@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
     private static final String TAG = "MainActivity";
     SharedPreferences prefs;
     ProgressDialog pd;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -58,10 +57,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
             {
                 EditText text = (EditText) findViewById(R.id.edit_text_post_chat);
                 String chat = text.getText().toString();
-
-                pd = ProgressDialog.show(this, "", "Posting Message...");
+                pd = ProgressDialog.show(this, "", "Posting message...");
                 new ChatWriter().execute(chat);
-
                 text.setText("");
                 Log.d(TAG,"posting a message menu item ");
                 break;
@@ -69,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
             }
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -95,48 +93,44 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 Log.d(TAG, "stopping service");
                 break;
             }
+            case R.id.menu_item_display_chatter:
+            {
+                startActivity(new Intent(this, DisplayActivity.class) );
+                Log.d(TAG, "display chatter");
+                break;
+            }
             case R.id.menu_item_view_preferences:
             {
                 Intent intent = new Intent(this, PrefsActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.menu_item_display_chatter:
-            {
-                Intent intent = new Intent(this, DisplayActivity.class);
-                startActivity(intent);
-                Log.d(TAG, "starting Display Activity");
-                break;
-            }
         }
         return true;
     }
-
-    private class ChatWriter extends AsyncTask <String, Void, String>
+    private class ChatWriter extends AsyncTask<String,Void,String>
     {
+
         @Override
         protected String doInBackground(String... strings)
         {
             String message = strings[0];
-            String userName = prefs.getString(getResources().getString(R.string.preference_key_login_name), "unknown");
             try
             {
                 HttpClient client = new DefaultHttpClient();
-                HttpPost post = new HttpPost("http://www.youcode.ca/JitterServlet");
+                HttpPost request = new HttpPost("http://www.youcode.ca/JitterServlet");
                 List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
                 postParameters.add(new BasicNameValuePair("DATA", message));
-                postParameters.add(new BasicNameValuePair("LOGIN_NAME", userName));
+                postParameters.add(new BasicNameValuePair("LOGIN_NAME", "Async"));
                 UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
-                post.setEntity(formEntity);
-                client.execute(post);
+                request.setEntity(formEntity);
+                client.execute(request);
 
-                Log.d(TAG,"should be a successful");
             }
             catch(Exception e)
             {
-                Log.d(TAG, "error on ChatWriter() " + e);
+                Log.d(TAG, "Error posting message.");
             }
-
             return null;
         }
 
@@ -146,4 +140,5 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
             pd.dismiss();
         }
     }
+
 }

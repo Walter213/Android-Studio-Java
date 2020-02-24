@@ -2,7 +2,6 @@ package com.example.week06;
 
 import android.app.Service;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -23,12 +22,13 @@ import java.net.URI;
 public class ChatService extends Service
 {
     static final String TAG = "ChatService";
-    static final int DELAY = 60000;
+    static final int DELAY = 120000;
     private boolean bRun = false;
     private ChatThread theThread = null;
 
     DBManager dbManager;
-    SQLiteDatabase db;
+    SQLiteDatabase database;
+
 
     @Override
     public IBinder onBind(Intent intent)
@@ -40,7 +40,6 @@ public class ChatService extends Service
     public void onCreate()
     {
         super.onCreate();
-
         dbManager = new DBManager(this);
 
         theThread = new ChatThread("ChatServiceThread");
@@ -82,6 +81,7 @@ public class ChatService extends Service
                 try
                 {
                     Log.d(TAG,"reader executed one cycle");
+                    getFromServer();
                     Thread.sleep(DELAY);
                 }
                 catch(InterruptedException e)
@@ -91,10 +91,9 @@ public class ChatService extends Service
             }
         }
     }
-
-    private void getFromServer()
+    public void getFromServer()
     {
-        BufferedReader in = null;
+        BufferedReader in;
         try
         {
             HttpClient client = new DefaultHttpClient();
@@ -102,42 +101,60 @@ public class ChatService extends Service
             request.setURI(new URI("http://www.youcode.ca/Week05Servlet"));
             HttpResponse response = client.execute(request);
             in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-
+            StringBuffer sb = new StringBuffer("");
             String line = "";
 
-            // Link to Database
+            database = dbManager.getWritableDatabase();
             ContentValues values = new ContentValues();
-            db = dbManager.getWritableDatabase();
 
             while((line = in.readLine()) != null)
             {
                 values.clear();
-                values.put(dbManager.C_ID, line);
+
+                values.put(DBManager.C_ID, Integer.parseInt(line));
 
                 line = in.readLine();
                 values.put(DBManager.C_SENDER, line);
 
                 line = in.readLine();
-                values.put(DBManager.C_DATA, line);
+                values.put(DBManager.C_MESSAGE, line);
 
                 line = in.readLine();
                 values.put(DBManager.C_DATE, line);
 
                 try
                 {
-                    db.insertOrThrow(DBManager.TABLE_NAME, null, values);
-                    Log.d(TAG, "Record added to database.");
+                    database.insertOrThrow(DBManager.TABLE_NAME, null, values);
+                    Log.d(TAG, "record added to database ");
                 }
                 catch(SQLException sqle)
                 {
-                    //normally ignore this exception
-                    Log.d(TAG, "Attempt to insert duplicate record.");
+                    //Log.d(TAG, "duplicate record ");
                 }
-            }
+            }// closes while loop
+            in.close();
+            database.close();
         }
         catch(Exception e)
         {
-            Log.d(TAG, "Read Failed: " + e);
+            Log.d(TAG, "read failed " + e);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
