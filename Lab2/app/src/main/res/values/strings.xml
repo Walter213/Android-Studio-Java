@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Lab2</string>
+
+    // Preferences Titles and Summaries
+    <string name="preferences_login_name_title">UserName</string>
+    <string name="preferences_login_name_summary">Enter UserName</string>
+    <string name="preferences_password_title">Password</string>
+    <string name="preferences_password_summary">Enter Password</string>
+    <string name="preferences_background_title">Main Background Color</string>
+    <string name="preferences_background_summary">Change Background Here</string>
+    <string name="preferences_font_title">Font Size</string>
+    <string name="preferences_font_summary">Choose Font Size</string>
+</resources>
