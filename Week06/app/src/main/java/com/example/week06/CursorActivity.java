@@ -1,14 +1,12 @@
 package com.example.week06;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
-public class CursorActivity extends AppCompatActivity
+public class CursorActivity extends BaseActivity
 {
     static final String TAG = "CursorActivity";
     DBManager dbMan;

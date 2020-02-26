@@ -1,8 +1,21 @@
 <resources>
-    <string name="app_name">Lab2</string>
+    // App Name
+    <string name="app_name">TODO or NOT</string>
+
+    // Menu Names
+    <string name="menu_item_home">Home</string>
+    <string name="menu_item_preferences">Preferences</string>
+
+    // EditText and Button Names
+    <string name="edit_text_create_list">Save</string>
+    <string name="edit_text_add_to_list">Add</string>
+
+    <string name="button_update">Update</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_archive">Archive</string>
 
     // Preferences Titles and Summaries
-    <string name="preferences_login_name_title">UserName</string>
+    <string name="preferences_login_name_title">Alias</string>
     <string name="preferences_login_name_summary">Enter UserName</string>
     <string name="preferences_password_title">Password</string>
     <string name="preferences_password_summary">Enter Password</string>

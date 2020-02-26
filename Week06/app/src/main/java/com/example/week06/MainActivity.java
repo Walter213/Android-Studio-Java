@@ -30,7 +30,7 @@ import org.apache.http.message.BasicNameValuePair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener
+public class MainActivity extends BaseActivity implements OnClickListener
 {
     private static final String TAG = "MainActivity";
     SharedPreferences prefs;
@@ -67,52 +67,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected( MenuItem item)
-    {
-        switch(item.getItemId())
-        {
-            case R.id.menu_item_start_service:
-            {
-                startService(new Intent(this, ChatService.class) );
-                Log.d(TAG, "starting service");
-                break;
-            }
-            case R.id.menu_item_stop_service:
-            {
-                stopService(new Intent(this, ChatService.class) );
-                Log.d(TAG, "stopping service");
-                break;
-            }
-            case R.id.menu_item_display_chatter:
-            {
-                startActivity(new Intent(this, DisplayActivity.class) );
-                Log.d(TAG, "display chatter");
-                break;
-            }
-            case R.id.menu_item_view_cursor:
-            {
-                startActivity(new Intent(this, CursorActivity.class) );
-                break;
-            }
-            case R.id.menu_item_view_preferences:
-            {
-                Intent intent = new Intent(this, PrefsActivity.class);
-                startActivity(intent);
-                break;
-            }
-        }
-        return true;
-    }
     private class ChatWriter extends AsyncTask<String,Void,String>
     {
 

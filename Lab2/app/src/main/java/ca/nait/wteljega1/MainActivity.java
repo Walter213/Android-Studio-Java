@@ -1,8 +1,5 @@
 package ca.nait.wteljega1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -10,12 +7,9 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener
+public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener
 {
     SharedPreferences prefs;
     View mainView;
@@ -46,43 +40,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch(item.getItemId())
-        {
-            case R.id.menu_item_start_service:
-            {
-                startService(new Intent(this,GetterService.class));
-                break;
-            }
-            case R.id.menu_item_stop_service:
-            {
-                stopService(new Intent(this,GetterService.class));
-                break;
-            }
-            case R.id.menu_preferences:
-            {
-                Intent intent = new Intent(this,SettingsActivity.class);
-                this.startActivity(intent);
-                break;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        Log.d(TAG, "in onCreateOptionsMenu()");
-        return true;
-    }
-
-    @Override
     public void onClick(View v)
     {
+        // currentItemIndex is a global variable
 
+        // Update
+        // int id = aItems.get(currentItemIndex).getId();
+
+        // Delete
+
+        // Archived
     }
 
     @Override
@@ -91,4 +58,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         String backgroundColor = prefs.getString("preference_main_bg_color", "#702963");
         mainView.setBackgroundColor(Color.parseColor(backgroundColor));
     }
+
+    // archived, send to server button
 }
