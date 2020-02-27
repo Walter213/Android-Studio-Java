@@ -11,9 +11,9 @@ public class DBManager extends SQLiteOpenHelper
     static final String TAG = "DBManager";
     static final String DB_Name = "Lab2.db";
     static final int DB_Version = 1;
-    static final String Table_Name = "ListTitles";
+    static final String TABLE_NAME = "ListTitles";
     static final String LT_LID = BaseColumns._ID;
-    static final String LT_Description = "";
+    static final String LT_DESCRIPTION = "";
 
     public DBManager(Context context)
     {
@@ -23,15 +23,23 @@ public class DBManager extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase database)
     {
-        //String createSQL
+        // List Titles Creation
+        String createSQLListTitles = "create table " + TABLE_NAME + " (" + LT_LID + " int primary key, "
+                + LT_DESCRIPTION + " text)";
+
+        database.execSQL(createSQLListTitles);
+
+        // List Items Creation
+//        String createSQLListItems = "create table " + TABLE_NAME + " (" + LT_LID + " int primary key, "
+//                + LT_DESCRIPTION + " text)";
+//
+//        database.execSQL(createSQLListTitles);
+
+        Log.d(TAG, "in OnResume()");
     }
 
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion)
     {
-        //database.execSQL("drop table if exists " + TABLE_NAME);
-        //Log.d(TAG, " updating table " + TABLE_NAME);
-
-        // explicitly call the override
-        //onCreate(database);
+        database.execSQL("drop table if exists " + TABLE_NAME);
     }
 }

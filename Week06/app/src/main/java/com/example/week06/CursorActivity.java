@@ -2,6 +2,10 @@ package com.example.week06;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -16,6 +20,8 @@ public class CursorActivity extends BaseActivity
     DBManager dbManager;
     SQLiteDatabase database;
     Cursor cursor;
+    ChatReceiver receiver;
+    IntentFilter filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +31,9 @@ public class CursorActivity extends BaseActivity
         listView = findViewById(R.id.list_view_cursor);
         dbManager = new DBManager(this);
         database = dbManager.getReadableDatabase();
+
+        receiver = new ChatReceiver();
+        filter = new IntentFilter(ChatService.NEW_MESSAGE_RECEIVED);
     }
 
     @Override
@@ -36,8 +45,28 @@ public class CursorActivity extends BaseActivity
         adapter = new DBAdapter(this, cursor);
         listView.setAdapter(adapter);
 
+        registerReceiver(receiver, filter);
+
         Log.d(TAG, "in onResume()");
         super.onResume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        unregisterReceiver(receiver);
+        super.onPause();
+    }
+
+    class ChatReceiver extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            cursor.requery();
+            adapter.notifyDataSetChanged();
+            Log.d(TAG, "receive a "+ ChatService.NEW_MESSAGE_RECEIVED);
+        }
     }
 }
 

@@ -4,4 +4,8 @@
     <color name="colorPrimary">#FF7433</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorGrey">#808080</color>
+    <color name="colorGreenButton">#1FAB4D</color>
+    <color name="colorBlueButton">#0000FF</color>
+    <color name="colorRedButton">#FF0000</color>
+    <color name="colorArchive">#FFD700</color>s
 </resources>

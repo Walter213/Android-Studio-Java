@@ -22,6 +22,7 @@ import java.net.URI;
 public class ChatService extends Service
 {
     static final String TAG = "ChatService";
+    public static final String NEW_MESSAGE_RECEIVED = "new_message_received";
     static final int DELAY = 120000;
     public static boolean bRun = false;
     private ChatThread theThread = null;
@@ -81,7 +82,10 @@ public class ChatService extends Service
                 try
                 {
                     Log.d(TAG,"reader executed one cycle");
-                    getFromServer();
+                    if (getFromServer() == true)
+                    {
+                        Intent broadcast = new Intent (NEW_MESSAGE_RECEIVED);
+                    }
                     Thread.sleep(DELAY);
                 }
                 catch(InterruptedException e)
@@ -91,8 +95,9 @@ public class ChatService extends Service
             }
         }
     }
-    public void getFromServer()
+    public boolean getFromServer()
     {
+        boolean bNewMessage = false;
         BufferedReader in;
         try
         {
@@ -125,6 +130,7 @@ public class ChatService extends Service
                 try
                 {
                     database.insertOrThrow(DBManager.TABLE_NAME, null, values);
+                    bNewMessage = true;
                     Log.d(TAG, "record added to database ");
                 }
                 catch(SQLException sqle)
@@ -139,6 +145,7 @@ public class ChatService extends Service
         {
             Log.d(TAG, "read failed " + e);
         }
+        return bNewMessage;
     }
 }
 

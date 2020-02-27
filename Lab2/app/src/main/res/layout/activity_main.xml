@@ -16,21 +16,25 @@
             android:layout_width="220sp"
             android:layout_height="50sp"
             android:layout_margin="12sp"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:hint="Enter List Name Here"/>
         <Button
             android:id="@+id/save_to_spinner"
             android:layout_width="70sp"
             android:layout_height="40sp"
             android:text="@string/edit_text_create_list"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@color/colorGreenButton"/>
     </LinearLayout>
 
     <Spinner
         android:id="@+id/list_of_items"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="25dp"
         android:dropDownWidth="200sp"
+        android:layout_gravity="center_horizontal"
         android:minWidth="200dp"
+        android:layout_marginTop="8sp"
         android:background="@color/colorGrey"/>
 
     <LinearLayout
@@ -44,13 +48,15 @@
             android:layout_width="220sp"
             android:layout_height="50sp"
             android:layout_margin="12sp"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:hint="Enter List Item To Add"/>
         <Button
             android:id="@+id/add_to_list"
             android:layout_width="70sp"
             android:layout_height="40sp"
             android:text="@string/edit_text_add_to_list"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@color/colorGreenButton"/>
     </LinearLayout>
 
     <ListView
@@ -72,18 +78,24 @@
             android:layout_width="80sp"
             android:layout_height="40sp"
             android:text="@string/button_update"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@color/colorBlueButton"
+            android:layout_margin="10sp"/>
         <Button
             android:id="@+id/delete_list_item"
             android:layout_width="80sp"
             android:layout_height="40sp"
             android:text="@string/button_delete"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@color/colorRedButton"
+            android:layout_margin="10sp"/>
         <Button
             android:id="@+id/add_to_archive"
             android:layout_width="100sp"
             android:layout_height="40sp"
             android:text="@string/button_archive"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:background="@color/colorArchive"
+            android:layout_margin="10sp"/>
     </LinearLayout>
 </LinearLayout>

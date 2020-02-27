@@ -8,6 +8,8 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener
 {
@@ -36,20 +38,26 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
 
         prefs.registerOnSharedPreferenceChangeListener(this);
 
+        Button createNewListItem = (Button)findViewById(R.id.save_to_spinner);
+        createNewListItem.setOnClickListener(this);
+
         Log.d(TAG, "In OnCreate()");
     }
 
     @Override
-    public void onClick(View v)
+    public void onClick(View view)
     {
-        // currentItemIndex is a global variable
+        switch(view.getId())
+        {
+            case R.id.save_to_spinner:
+            {
+                EditText newListItem = (EditText)findViewById(R.id.edit_text_add_new_spinner_item);
+                String newSpinnerEntry = newListItem.getText().toString();
 
-        // Update
-        // int id = aItems.get(currentItemIndex).getId();
-
-        // Delete
-
-        // Archived
+                newListItem.setText("");
+                break;
+            }
+        }
     }
 
     @Override
