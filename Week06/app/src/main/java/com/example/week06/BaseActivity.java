@@ -11,14 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity
 {
-    private static final String TAG = "BaseActivity";
 
+    private static final String TAG = "BaseActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -34,17 +33,15 @@ public class BaseActivity extends AppCompatActivity
         if(menu != null)
         {
             toggleItem = menu.findItem(R.id.menu_item_toggle_service);
-
-            if(ChatService.bRun == false)
+            if (ChatService.bRun == false)
             {
-                toggleItem.setTitle(getResources().getString(R.string.menu_item_start_service));
+                toggleItem.setTitle(this.getResources().getString(R.string.menu_item_start_service));
             }
             else
             {
-                toggleItem.setTitle(getResources().getString(R.string.menu_item_stop_service));
+                toggleItem.setTitle(this.getResources().getString(R.string.menu_item_stop_service));
             }
         }
-
         return true;
     }
 
@@ -57,14 +54,15 @@ public class BaseActivity extends AppCompatActivity
             {
                 if(ChatService.bRun == false)
                 {
-                    startService(new Intent(this, ChatService.class) );
+                    startService(new Intent(this, ChatService.class));
                     Log.d(TAG, "starting service");
                 }
                 else
                 {
-                    stopService(new Intent(this, ChatService.class) );
-                    Log.d(TAG, "starting service");
+                    stopService(new Intent(this, ChatService.class));
+                    Log.d(TAG, "stopping service");
                 }
+
                 break;
             }
             case R.id.menu_item_display_chatter:
@@ -73,20 +71,21 @@ public class BaseActivity extends AppCompatActivity
                 Log.d(TAG, "display chatter");
                 break;
             }
-            case R.id.menu_item_view_cursor:
+            case R.id.menu_item_home:
+            {
+                startActivity(new Intent(this, MainActivity.class) );
+                Log.d(TAG, "menu item home");
+                break;
+            }
+            case R.id.menu_item_cursor_view:
             {
                 startActivity(new Intent(this, CursorActivity.class) );
+                Log.d(TAG, "cursor view");
                 break;
             }
             case R.id.menu_item_view_preferences:
             {
                 Intent intent = new Intent(this, PrefsActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.menu_item_home:
-            {
-                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             }

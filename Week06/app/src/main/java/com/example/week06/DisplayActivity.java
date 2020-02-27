@@ -1,5 +1,7 @@
 package com.example.week06;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;

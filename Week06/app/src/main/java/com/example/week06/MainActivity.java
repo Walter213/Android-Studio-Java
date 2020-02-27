@@ -67,6 +67,10 @@ public class MainActivity extends BaseActivity implements OnClickListener
         }
     }
 
+
+
+
+
     private class ChatWriter extends AsyncTask<String,Void,String>
     {
 

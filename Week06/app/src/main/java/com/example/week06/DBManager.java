@@ -10,7 +10,7 @@ public class DBManager extends SQLiteOpenHelper
 {
     static final String TAG ="DBManager";
     static final String DB_NAME = "chatter.db";
-    static final int DB_VERSION = 1;
+    static final int DB_VERSION = 2;
     static final String TABLE_NAME = "chatter";
     static final String C_ID = BaseColumns._ID;
     static final String C_DATE = "post_date";
