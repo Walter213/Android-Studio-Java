@@ -4,6 +4,7 @@
 
     // Menu Names
     <string name="menu_item_home">Home</string>
+    <string name="menu_item_getter_service">Getter Service</string>
     <string name="menu_item_preferences">Preferences</string>
 
     // EditText and Button Names

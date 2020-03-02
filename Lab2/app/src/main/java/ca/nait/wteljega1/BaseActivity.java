@@ -36,8 +36,12 @@ public class BaseActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
             }
-            // Look At Archived Items Menu Selector Required
-            // Delete List Item Creation
+            case R.id.menu_item_getting_service:
+            {
+                Intent intent = new Intent(this, GetterService.class);
+                startService(intent);
+                break;
+            }
             case R.id.menu_item_preferences:
             {
                 Intent intent = new Intent(this, SettingsActivity.class);
