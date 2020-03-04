@@ -7,18 +7,18 @@ import android.widget.SimpleCursorAdapter;
 
 public class DBAdapter extends SimpleCursorAdapter
 {
-    static final String[] columns = {};
-    static final int[] ids = {};
-
+//    static final String[] columns = {};
+//    static final int[] ids = {};
+//
     public DBAdapter(Context context, Cursor cursor)
     {
         super(context, R.layout.archived_row, cursor, null, null);
     }
-
-    // called to draw each row in the cursor
-    @Override
-    public void bindView(View row, Context context, Cursor cursor)
-    {
-
-    }
+//
+//    // called to draw each row in the cursor
+//    @Override
+//    public void bindView(View row, Context context, Cursor cursor)
+//    {
+//
+//    }
 }

@@ -1,6 +1,7 @@
 package ca.nait.wteljega1;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity
 {
+    private static final String TAG = "BaseActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -34,12 +37,6 @@ public class BaseActivity extends AppCompatActivity
             {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                break;
-            }
-            case R.id.menu_item_getting_service:
-            {
-                Intent intent = new Intent(this, GetterService.class);
-                startService(intent);
                 break;
             }
             case R.id.menu_item_preferences:

@@ -14,7 +14,7 @@ public class DBManager extends SQLiteOpenHelper
 
     static final String TABLE_NAME = "ListTitles";
     static final String LT_LID = BaseColumns._ID;
-    static final String LT_DESCRIPTION = "";
+    static final String LT_DESCRIPTION = "list_title_desc";
 
     static final String TABLE_NAME1 = "ListItems";
     static final String LI_LID = BaseColumns._ID;
@@ -32,18 +32,20 @@ public class DBManager extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase database)
     {
         // List Titles Creation
-        String ListTitlesTable = "create table " + TABLE_NAME + " (" + LT_LID + " int primary key autoincrement, "
+        String ListTitlesTable = "create table " + TABLE_NAME + " (" + LT_LID + " integer primary key autoincrement, "
                 + LT_DESCRIPTION + " text)";
 
         database.execSQL(ListTitlesTable);
 
+        Log.d(TAG, ListTitlesTable);
+
         // List Items Creation
-        String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " int primary key autoincrement, " + LI_LILTD + " text,"
+        String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " integer primary key autoincrement, " + LI_LILTD + " text,"
                 + LI_LIDESC + " text," + LI_DATE + " text," + LI_COMPLETED + " text)";
 
         database.execSQL(ListItemsTable);
 
-        Log.d(TAG, "in OnResume()");
+        Log.d(TAG, ListItemsTable);
     }
 
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion)
