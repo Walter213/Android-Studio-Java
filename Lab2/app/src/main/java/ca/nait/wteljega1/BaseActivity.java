@@ -37,12 +37,15 @@ public class BaseActivity extends AppCompatActivity
             {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+                Log.d(TAG, "Going To Home Page");
                 break;
             }
+            // achieved
             case R.id.menu_item_preferences:
             {
                 Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
+                Log.d(TAG, "Going To Preferences");
                 break;
             }
         }

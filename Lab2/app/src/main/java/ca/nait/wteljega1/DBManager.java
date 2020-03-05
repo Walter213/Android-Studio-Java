@@ -1,10 +1,15 @@
 package ca.nait.wteljega1;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.List;
 
 public class DBManager extends SQLiteOpenHelper
 {
@@ -22,6 +27,8 @@ public class DBManager extends SQLiteOpenHelper
     static final String LI_LIDESC = "list_description";
     static final String LI_DATE = "list_date";
     static final String LI_COMPLETED = "completed_flag";
+
+    // no Date or completed flag in his example
 
     public DBManager(Context context)
     {
@@ -41,7 +48,7 @@ public class DBManager extends SQLiteOpenHelper
 
         // List Items Creation
         String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " integer primary key autoincrement, " + LI_LILTD + " text,"
-                + LI_LIDESC + " text," + LI_DATE + " text," + LI_COMPLETED + " text)";
+                + LI_LIDESC + " text," + LI_DATE + " text," + LI_COMPLETED + " integer)";
 
         database.execSQL(ListItemsTable);
 
@@ -57,5 +64,26 @@ public class DBManager extends SQLiteOpenHelper
         Log.d(TAG, " updating table " + TABLE_NAME1);
 
         onCreate(database);
+    }
+
+    public List<String> getListTitleDescription()
+    {
+        List<String> desc = new ArrayList<String>();
+
+        String query = "SELECT " + LT_DESCRIPTION + " FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                desc.add(cursor.getString(1));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return desc;
     }
 }

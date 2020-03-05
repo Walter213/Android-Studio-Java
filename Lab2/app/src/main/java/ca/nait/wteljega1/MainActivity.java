@@ -2,6 +2,7 @@ package ca.nait.wteljega1;
 
 import android.content.ContentValues;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
@@ -12,11 +13,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener
 {
     SharedPreferences prefs;
     View mainView;
+    Spinner spinner;
     DBManager dbManager;
     SQLiteDatabase db;
 
@@ -47,7 +52,22 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         createNewListItem.setOnClickListener(this);
 
         // Populating Spinner
-        // Start here next class which is tomorrow
+        DBManager datab = new DBManager((getApplicationContext()));
+
+        List<String> getdesc = datab.getListTitleDescription();
+
+        // https://www.androidhive.info/2012/06/android-populating-spinner-data-from-sqlite-database/
+
+//        // Creating adapter for spinner
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, lables);
+//
+//        // Drop down layout style - list view with radio button
+//        dataAdapter
+//                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        // attaching data adapter to spinner
+//        spinner.setAdapter(dataAdapter);
 
         Log.d(TAG, "In OnCreate()");
     }
