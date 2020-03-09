@@ -2,15 +2,13 @@ package ca.nait.wteljega1;
 
 import android.content.ContentValues;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -52,22 +50,8 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         createNewListItem.setOnClickListener(this);
 
         // Populating Spinner
-        DBManager datab = new DBManager((getApplicationContext()));
-
-        List<String> getdesc = datab.getListTitleDescription();
-
-        // https://www.androidhive.info/2012/06/android-populating-spinner-data-from-sqlite-database/
-
-//        // Creating adapter for spinner
-//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_spinner_item, lables);
-//
-//        // Drop down layout style - list view with radio button
-//        dataAdapter
-//                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        // attaching data adapter to spinner
-//        spinner.setAdapter(dataAdapter);
+        spinner = (Spinner)findViewById(R.id.list_of_items);
+        loadSpinnerData();
 
         Log.d(TAG, "In OnCreate()");
     }
@@ -77,6 +61,18 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     {
         String backgroundColor = prefs.getString("preference_main_bg_color", "#702963");
         mainView.setBackgroundColor(Color.parseColor(backgroundColor));
+    }
+
+    public void loadSpinnerData()
+    {
+        DBManager dataBase = new DBManager(getApplicationContext());
+
+        List<String> getDesc = dataBase.getListTitleDescription();
+
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getDesc);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(spinnerAdapter);
     }
 
     @Override
@@ -94,6 +90,10 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
                 long newRowID = db.insert(DBManager.TABLE_NAME, null, values);
 
                 newListItem.setText("");
+
+                // loading spinner data
+                loadSpinnerData();
+
                 Log.d(TAG, DBManager.LT_DESCRIPTION + " " + newRowID + " is inserted into database");
                 break;
             }

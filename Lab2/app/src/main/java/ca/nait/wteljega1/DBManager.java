@@ -25,10 +25,6 @@ public class DBManager extends SQLiteOpenHelper
     static final String LI_LID = BaseColumns._ID;
     static final String LI_LILTD = "list_items_ID";
     static final String LI_LIDESC = "list_description";
-    static final String LI_DATE = "list_date";
-    static final String LI_COMPLETED = "completed_flag";
-
-    // no Date or completed flag in his example
 
     public DBManager(Context context)
     {
@@ -48,8 +44,7 @@ public class DBManager extends SQLiteOpenHelper
 
         // List Items Creation
         String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " integer primary key autoincrement, " + LI_LILTD + " text,"
-                + LI_LIDESC + " text," + LI_DATE + " text," + LI_COMPLETED + " integer)";
-
+                + LI_LIDESC + " text)";
         database.execSQL(ListItemsTable);
 
         Log.d(TAG, ListItemsTable);
@@ -78,7 +73,7 @@ public class DBManager extends SQLiteOpenHelper
         if (cursor.moveToFirst())
         {
             do {
-                desc.add(cursor.getString(1));
+                desc.add(cursor.getString(cursor.getColumnIndex(LT_DESCRIPTION)));
             } while (cursor.moveToNext());
         }
         cursor.close();
