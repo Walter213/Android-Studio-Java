@@ -8,7 +8,6 @@ import android.provider.BaseColumns;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 public class DBManager extends SQLiteOpenHelper
@@ -43,7 +42,7 @@ public class DBManager extends SQLiteOpenHelper
         Log.d(TAG, ListTitlesTable);
 
         // List Items Creation
-        String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " integer primary key autoincrement, " + LI_LILTD + " text,"
+        String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " integer primary key autoincrement, " + LI_LILTD + " integer,"
                 + LI_LIDESC + " text)";
         database.execSQL(ListItemsTable);
 
@@ -65,7 +64,8 @@ public class DBManager extends SQLiteOpenHelper
     {
         List<String> desc = new ArrayList<String>();
 
-        String query = "SELECT " + LT_DESCRIPTION + " FROM " + TABLE_NAME;
+        //String query = "SELECT " + LT_DESCRIPTION + " FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -73,12 +73,38 @@ public class DBManager extends SQLiteOpenHelper
         if (cursor.moveToFirst())
         {
             do {
-                desc.add(cursor.getString(cursor.getColumnIndex(LT_DESCRIPTION)));
+                int LTID = cursor.getColumnIndex(LT_LID);
+                String description = cursor.getString(cursor.getColumnIndex(LT_DESCRIPTION));
+
+                desc.add(new ListTitle(LTID, description));
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
 
         return desc;
+    }
+
+    public List<String> getListItems()
+    {
+        List<String> getListItems = new ArrayList<String>();
+
+        String query = "SELECT * FROM " + TABLE_NAME1;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst())
+        {
+            do {
+                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LID)));
+                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LILTD)));
+                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LIDESC)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        return  getListItems;
     }
 }
