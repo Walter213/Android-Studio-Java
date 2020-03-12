@@ -73,10 +73,7 @@ public class DBManager extends SQLiteOpenHelper
         if (cursor.moveToFirst())
         {
             do {
-                int LTID = cursor.getColumnIndex(LT_LID);
-                String description = cursor.getString(cursor.getColumnIndex(LT_DESCRIPTION));
-
-                desc.add(new ListTitle(LTID, description));
+                desc.add(cursor.getString(cursor.getColumnIndex(LT_DESCRIPTION)));
             } while (cursor.moveToNext());
         }
         cursor.close();

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_x_cord"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:background="#D6BE74"
+        android:layout_margin="20dp"/>
+    <TextView
+        android:id="@+id/tv_y_cord"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:background="#BAE489"
+        android:layout_margin="20dp"/>
+    <TextView
+        android:id="@+id/tv_z_cord"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:background="#BAE489"
+        android:layout_margin="20dp"/>
+
+</LinearLayout>

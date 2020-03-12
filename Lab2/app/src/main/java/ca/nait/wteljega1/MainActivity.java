@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     DBManager dbManager;
     SQLiteDatabase db;
 
-    public static int spinnerItemNumber;
+    public static long spinnerItemNumber;
 
     private static final String TAG = "MainActivity";
 
@@ -47,15 +47,17 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
 
         prefs.registerOnSharedPreferenceChangeListener(this);
 
-        // Save To Spinner Button
+        // Save To Spinner Button (List Titles Table)
         Button createNewListItem = (Button)findViewById(R.id.save_to_spinner);
         createNewListItem.setOnClickListener(this);
 
-        // start from https://stackoverflow.com/questions/54801724/how-i-get-selected-spinner-value-id-from-sqlite-database
         // Populating Spinner
         spinner = (Spinner)findViewById(R.id.list_of_items);
-//        loadSpinnerData();
-//        spinner.setOnClickListener(this);
+        loadSpinnerData();
+
+        // Adding To List Items Table
+        Button createNewListEntry = (Button)findViewById(R.id.add_to_list);
+        createNewListEntry.setOnClickListener(this);
 
         Log.d(TAG, "In OnCreate()");
     }
@@ -69,17 +71,17 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     }
 
     // Loading Spinner Data
-//    public void loadSpinnerData()
-//    {
-//        DBManager dataBase = new DBManager(getApplicationContext());
-//
-//        List<String> getDesc = dataBase.getListTitleDescription();
-//
-//        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getDesc);
-//        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        spinner.setAdapter(spinnerAdapter);
-//    }
+    public void loadSpinnerData()
+    {
+        DBManager dataBase = new DBManager(getApplicationContext());
+
+        List<String> getDesc = dataBase.getListTitleDescription();
+
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getDesc);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(spinnerAdapter);
+    }
 
     @Override
     public void onClick(View view)
@@ -111,10 +113,13 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
                 String newListViewEntry = newListItem.getText().toString();
 
                 ContentValues values = new ContentValues();
+
                 // need to grab the id from the spinner
-                // myspinner.getSelectedItemId();
-                //values.put(DBManager.LI_LILTD, somehow have to get the spinner id from that);
+                spinnerItemNumber = spinner.getSelectedItemId();
+
+                values.put(DBManager.LI_LID, spinnerItemNumber + 1);
                 values.put(DBManager.LI_LIDESC, newListViewEntry);
+                long newRowID = db.insert(DBManager.TABLE_NAME1, null, values);
 
                 // clearing edit text
                 newListItem.setText("");
