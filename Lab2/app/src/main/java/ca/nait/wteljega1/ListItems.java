@@ -5,6 +5,8 @@ public class ListItems
     private int ListItemsID;
     private int ListTitleID;
     private String ListDescription;
+    private String Date;
+    private int Completed;
 
     public ListItems()
     {
@@ -16,6 +18,8 @@ public class ListItems
         this.ListItemsID = id;
         this.ListTitleID = titleid;
         this.ListDescription = desc;
+        this.Date = date;
+        this.Completed = flag;
     }
 
     public void setListItemsID(int listItemsID)
@@ -43,5 +47,17 @@ public class ListItems
     public String getListDescription()
     {
         return ListDescription;
+    }
+
+    public void setDate (String date) { Date = date; }
+    public String getDate() {
+        return Date;
+    }
+
+    public int getCompleted() {
+        return Completed;
+    }
+    public void setCompleted(int completed) {
+        Completed = completed;
     }
 }

@@ -24,6 +24,8 @@ public class DBManager extends SQLiteOpenHelper
     static final String LI_LID = BaseColumns._ID;
     static final String LI_LILTD = "list_items_ID";
     static final String LI_LIDESC = "list_description";
+    static final String LI_DATE = "list_date";
+    static final String LI_COMPLETE = "List_Completed_Flag";
 
     public DBManager(Context context)
     {
@@ -42,8 +44,8 @@ public class DBManager extends SQLiteOpenHelper
         Log.d(TAG, ListTitlesTable);
 
         // List Items Creation
-        String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " integer primary key autoincrement, " + LI_LILTD + " integer,"
-                + LI_LIDESC + " text)";
+        String ListItemsTable = "create table " + TABLE_NAME1 + " (" + LI_LID + " integer primary key autoincrement, " + LI_LILTD + " integer, "
+                + LI_LIDESC + " text, " + LI_DATE + " text, " + LI_COMPLETE + " int)";
         database.execSQL(ListItemsTable);
 
         Log.d(TAG, ListItemsTable);
@@ -60,48 +62,49 @@ public class DBManager extends SQLiteOpenHelper
         onCreate(database);
     }
 
-    public List<String> getListTitleDescription()
-    {
-        List<String> desc = new ArrayList<String>();
+//    public List<String> getListTitleDescription()
+//    {
+//        List<String> desc = new ArrayList<String>();
+//
+//        //String query = "SELECT " + LT_DESCRIPTION + " FROM " + TABLE_NAME;
+//        String query = "SELECT * FROM " + TABLE_NAME;
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(query, null);
+//
+//        if (cursor.moveToFirst())
+//        {
+//            do {
+//                // desc.add(cursor.getString(cursor.getColumnIndex(LT_LID)));
+//                desc.add(cursor.getString(cursor.getColumnIndex(LT_DESCRIPTION)));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//
+//        return desc;
+//    }
 
-        //String query = "SELECT " + LT_DESCRIPTION + " FROM " + TABLE_NAME;
-        String query = "SELECT * FROM " + TABLE_NAME;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.moveToFirst())
-        {
-            do {
-                desc.add(cursor.getString(cursor.getColumnIndex(LT_DESCRIPTION)));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-
-        return desc;
-    }
-
-    public List<String> getListItems()
-    {
-        List<String> getListItems = new ArrayList<String>();
-
-        String query = "SELECT * FROM " + TABLE_NAME1;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.moveToFirst())
-        {
-            do {
-                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LID)));
-                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LILTD)));
-                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LIDESC)));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-
-        return  getListItems;
-    }
+//    public List<String> getListItems()
+//    {
+//        List<String> getListItems = new ArrayList<String>();
+//
+//        String query = "SELECT * FROM " + TABLE_NAME1 + " WHERE " + LI_LID + " = " + getListTitleDescription();
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(query, null);
+//
+//        if (cursor.moveToFirst())
+//        {
+//            do {
+//                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LID)));
+//                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LILTD)));
+//                getListItems.add(cursor.getString(cursor.getColumnIndex(LI_LIDESC)));
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        db.close();
+//
+//        return  getListItems;
+//    }
 }
