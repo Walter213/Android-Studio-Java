@@ -14,7 +14,7 @@
         android:layout_marginLeft="6dp"/>
     <TextView
         android:id="@+id/list_id"
-        android:layout_width="10dp"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:layout_toRightOf="@id/list_title_id"

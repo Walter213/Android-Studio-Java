@@ -40,7 +40,13 @@ public class BaseActivity extends AppCompatActivity
                 Log.d(TAG, "Going To Home Page");
                 break;
             }
-            // achieved
+            case R.id.menu_archive:
+            {
+                Intent intent = new Intent(this, ArchiveActivity.class);
+                startActivity(intent);
+                Log.d(TAG, "Going To Archived Items");
+                break;
+            }
             case R.id.menu_item_preferences:
             {
                 Intent intent = new Intent(this, SettingsActivity.class);

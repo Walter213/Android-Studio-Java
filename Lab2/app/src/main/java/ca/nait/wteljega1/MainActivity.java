@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -18,9 +21,17 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends BaseActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener
 {
@@ -36,6 +47,11 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     ArrayList<ListTitle> listTitleArray;
     ArrayList<ListItems> listItemsArray;
 
+    String createdDate;
+    String content;
+    String completedFlag;
+    String listTitle;
+
     int listPosition;
     int listItemPosition;
 
@@ -49,6 +65,14 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        if(Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy ourPolicy =
+                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(ourPolicy);
+        }
 
         // Database Creation
         dbManager = new DBManager(this);
@@ -175,6 +199,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
 
                     values.put(DBManager.LI_LILTD, ((ListTitle) listTitleArray.get(listPosition)).getListTitleID());
                     values.put(DBManager.LI_LIDESC, newListViewEntry);
+                    values.put(DBManager.LI_COMPLETE, 0);
                     values.put(DBManager.LI_DATE, DateFormat.getDateTimeInstance().format(new Date()));
                     long newRowID = db.insert(DBManager.TABLE_NAME1, null, values);
 
@@ -192,20 +217,30 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
                 EditText editTextUpdate = (EditText)findViewById(R.id.update_list_view_edit);
                 String updateDescription = editTextUpdate.getText().toString();
 
+                CheckBox editCheckBox = (CheckBox)findViewById(R.id.update_completed_check_box);
+
+                int completed = 0;
+
+                if (editCheckBox.isChecked())
+                {
+                    completed = 1;
+                }
+
                 ContentValues values = new ContentValues();
                 String whereClause = DBManager.LI_LID + " = " + (listItemsArray.get(listItemPosition).getListItemsID());
                 db = dbManager.getWritableDatabase();
 
                 values.put(DBManager.LI_LIDESC, updateDescription);
+                values.put(DBManager.LI_COMPLETE, completed);
 
                 try
                 {
                     db.update(DBManager.TABLE_NAME1, values, whereClause, null);
                     Toast.makeText(this, "Updated Successfully", Toast.LENGTH_LONG).show();
                 }
-                catch (Exception error)
+                catch (Exception sql)
                 {
-                    Toast.makeText(this, "Error: " + error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Error: " + sql, Toast.LENGTH_LONG).show();
                 }
 
                 refreshingListView();
@@ -215,32 +250,84 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
             case R.id.delete_list_item:
             {
                 EditText editTextDelete = (EditText)findViewById(R.id.update_list_view_edit);
+                CheckBox completeDelete = (CheckBox)findViewById(R.id.update_completed_check_box);
 
-                ContentValues values = new ContentValues();
-                String whereClause = DBManager.LI_LID + " = " + (listItemsArray.get(listItemPosition).getListItemsID());
-                db = dbManager.getWritableDatabase();
-
-                try
-                {
-                    db.delete(DBManager.TABLE_NAME1, whereClause, null);
-                    Toast.makeText(this, "Delete Successful", Toast.LENGTH_LONG).show();
-                }
-                catch(Exception error)
-                {
-                    Toast.makeText(this, "Error: " + error, Toast.LENGTH_LONG).show();
-                }
+                deleteRowInDatabase();
 
                 refreshingListView();
 
                 editTextDelete.setText("");
+                completeDelete.setChecked(false);
             }
             case R.id.add_to_archive:
             {
+                EditText editTextArchive = (EditText)findViewById(R.id.update_list_view_edit);
+                CheckBox completeArchive = (CheckBox)findViewById(R.id.update_completed_check_box);
 
+                // Post To Server Method
+                postToServer();
+
+                // Delete From ListView Method
+                deleteRowInDatabase();
+
+                Toast.makeText(this, "List Item Successfully Achieved", Toast.LENGTH_LONG).show();
+
+                refreshingListView();
+
+                editTextArchive.setText("");
+                completeArchive.setChecked(false);
             }
         }
     }
 
+    // Posting To Server
+    private void postToServer()
+    {
+        String username = prefs.getString("preference_user_name", "username");
+        String password = prefs.getString("preference_password", "password");
+
+        try
+        {
+            HttpClient client = new DefaultHttpClient();
+            HttpPost form = new HttpPost("http://www.youcode.ca/Lab02Post.jsp");
+            List<NameValuePair> formParameters = new ArrayList<NameValuePair>();
+
+            formParameters.add(new BasicNameValuePair("LIST_TITLE", listTitle));
+            formParameters.add(new BasicNameValuePair("CONTENT", content));
+            formParameters.add(new BasicNameValuePair("COMPLETED_FLAG", completedFlag));
+            formParameters.add(new BasicNameValuePair("ALIAS", username));
+            formParameters.add(new BasicNameValuePair("PASSWORD", password));
+            formParameters.add(new BasicNameValuePair("CREATED_DATE", createdDate));
+
+            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(formParameters);
+            form.setEntity(formEntity);
+            client.execute(form);
+        }
+        catch(Exception e)
+        {
+            Toast.makeText(this, "Error: " + e, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    // Deleting From Local Database
+    private void deleteRowInDatabase()
+    {
+        ContentValues values = new ContentValues();
+        String whereClause = DBManager.LI_LID + " = " + (listItemsArray.get(listItemPosition).getListItemsID());
+        db = dbManager.getWritableDatabase();
+
+        try
+        {
+            db.delete(DBManager.TABLE_NAME1, whereClause, null);
+            Toast.makeText(this, "Delete Successful", Toast.LENGTH_LONG).show();
+        }
+        catch (Exception sql)
+        {
+            Toast.makeText(this, "Error: " + sql, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    // Selected Spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
@@ -249,17 +336,20 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         populatingListView();
     }
 
+    // Part Of Spinner
     @Override
     public void onNothingSelected(AdapterView<?> parent)
     {
 
     }
 
+    // Refreshing List View
     public void refreshingListView()
     {
         populatingListView();
     }
 
+    // Populating List View
     private void populatingListView()
     {
         listItemsArray = new ArrayList<ListItems>();
@@ -289,6 +379,7 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         listview.setAdapter(cursorAdapter);
     }
 
+    // On Item Click in ListView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
@@ -297,6 +388,29 @@ public class MainActivity extends BaseActivity implements SharedPreferences.OnSh
         String list_description = listItemsArray.get(listItemPosition).getListDescription();
         EditText update_item = (EditText)findViewById(R.id.update_list_view_edit);
         update_item.setText(list_description);
+
+        int check_box = listItemsArray.get(listItemPosition).getCompleted();
+        CheckBox update_complete = (CheckBox)findViewById(R.id.update_completed_check_box);
+
+        if (check_box == 1)
+        {
+            update_complete.setChecked(true);
+        }
+        else
+        {
+            update_complete.setChecked(false);
+        }
+
+        String create_date = listItemsArray.get(listItemPosition).getDate();
+
+        String list_title = listTitleArray.get(listPosition).getListDescription();
+
+        // assigning global variables to make it much easier to enter into server
+        content = list_description;
+        int completed_flag = check_box;
+        completedFlag = String.valueOf(completed_flag);
+        createdDate = create_date;
+        listTitle = list_title;
 
         Button updateButton = (Button)findViewById(R.id.update_list_item);
         updateButton.setOnClickListener(this);

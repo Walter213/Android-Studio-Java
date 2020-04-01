@@ -4,7 +4,11 @@
 
     // Menu Names
     <string name="menu_item_home">Home</string>
+    <string name="menu_item_archive">Archive List</string>
     <string name="menu_item_preferences">Preferences</string>
+
+    // Checkbox
+    <string name="complete_flag_checkbox">Completed?</string>
 
     // EditText and Button Names
     <string name="edit_text_create_list">Save</string>
@@ -23,4 +27,7 @@
     <string name="preferences_background_summary">Change Background Here</string>
     <string name="preferences_font_title">Font Size</string>
     <string name="preferences_font_summary">Choose Font Size</string>
+
+    // Archive List
+    <string name="archive_empty">No Archived Items</string>
 </resources>

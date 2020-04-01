@@ -4,6 +4,9 @@
         android:id="@+id/menu_item_home"
         android:title="@string/menu_item_home" />
     <item
+        android:id="@+id/menu_archive"
+        android:title="@string/menu_item_archive" />
+    <item
         android:id="@+id/menu_item_preferences"
         android:title="@string/menu_item_preferences"/>
 </menu>
