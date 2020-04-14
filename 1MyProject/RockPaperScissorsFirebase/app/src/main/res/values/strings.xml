@@ -1,0 +1,28 @@
+<resources>
+    // App Name
+    <string name="app_name">Rock Paper Scissors / Firebase</string>
+
+    // Register / Log In Stuff
+    <string name="register_name">Register</string>
+    <string name="register_message">Create New Account</string>
+    <string name="user_message">Username</string>
+    <string name="email_message">Email</string>
+    <string name="password_message">Password</string>
+    <string name="new_account_button">Create New Account</string>
+    <string name="return_account_button">Got An Account? Return To Log In</string>
+
+    <string name="log_in_name">Log In</string>
+    <string name="log_in_message">Sign Into Your Account</string>
+    <string name="log_in_account_button">Login</string>
+    <string name="return_register_button">Do not have an Account? Click Here to Register</string>
+
+    // Main Activity
+    <string name="log_out_button">Logout</string>
+    <string name="player_choice">Players Choice</string>
+    <string name="npc_choice">Computer(NPC) Choice</string>
+    <string name="score">Score</string>
+    <string name="track_score">Player: 0    Computer: 0</string>
+    <string name="rock_button">Rock</string>
+    <string name="paper_button">Paper</string>
+    <string name="scissor_button">Scissors</string>
+</resources>

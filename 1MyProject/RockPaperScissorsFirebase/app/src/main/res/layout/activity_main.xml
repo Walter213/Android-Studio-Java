@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/images"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/log_out_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="8sp"
+        android:text="@string/log_out_button"
+        android:onClick="logout" />
+
+    <TextView
+        android:layout_marginTop="10sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/player_choice"
+        android:textSize="20sp"/>
+    <ImageView
+        android:id="@+id/player_image"
+        android:layout_marginTop="10sp"
+        android:layout_width="200sp"
+        android:layout_height="100sp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/rock"/>
+    <TextView
+        android:layout_marginTop="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/npc_choice"
+        android:textSize="20sp"/>
+    <ImageView
+        android:id="@+id/npc_image"
+        android:layout_marginTop="10sp"
+        android:layout_width="200sp"
+        android:layout_height="100sp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/rock"/>
+    <TextView
+        android:layout_marginTop="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/score"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/tv_track_score"
+        android:layout_marginTop="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/track_score"
+        android:textSize="18sp"/>
+    <LinearLayout
+        android:layout_marginTop="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/rock_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30sp"
+            android:text="@string/rock_button" />
+        <Button
+            android:id="@+id/paper_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paper_button" />
+        <Button
+            android:id="@+id/scissors_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30sp"
+            android:text="@string/scissor_button" />
+    </LinearLayout>
+</LinearLayout>
